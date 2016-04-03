@@ -67,6 +67,8 @@
 
 - (void)makeAndAddShellScript:(XCBuildShellScriptDefinition*)shellScript;
 
+- (void)makeAndAddShellScript:(XCBuildShellScriptDefinition *)shellScript toPosition:(NSUInteger)position;
+
 - (void)removeShellScriptByName:(NSString*)name;
 
 - (void)removeMemberWithKey:(NSString*)key;

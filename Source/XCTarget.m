@@ -184,6 +184,13 @@
 - (void)makeAndAddShellScript:(XCBuildShellScriptDefinition *)shellScript
 {
     NSDictionary* target = [[_project objects] objectForKey:_key];
+    NSMutableArray *buildPhases =[target objectForKey:@"buildPhases"];
+    [self makeAndAddShellScript:shellScript toPosition:[buildPhases count]];
+}
+
+- (void)makeAndAddShellScript:(XCBuildShellScriptDefinition *)shellScript toPosition:(NSUInteger)position
+{
+    NSDictionary* target = [[_project objects] objectForKey:_key];
     
     NSDictionary* reference = @{
                                 @"isa":[NSString xce_stringFromMemberType:PBXShellScriptBuildPhase],
@@ -201,7 +208,7 @@
     [_project objects][fileKey] = reference;
     
     NSMutableArray *buildPhases =[target objectForKey:@"buildPhases"];
-    [buildPhases addObject:fileKey];
+    [buildPhases insertObject:fileKey atIndex:position];
     [target setValue:buildPhases forKey:@"buildPhases"];
     
     [self flagMembersAsDirty];

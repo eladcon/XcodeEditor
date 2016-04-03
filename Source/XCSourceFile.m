@@ -240,6 +240,7 @@
                         [attr addObject:attribute];
                         settingsDict[@"ATTRIBUTES"] = attr;
                     }
+                    replaceBuildFile[@"settings"] = settingsDict;
                 }
                 [[_project objects] removeObjectForKey:key];
                 [_project objects][key] = replaceBuildFile;
